@@ -22,6 +22,8 @@ public:
             std::lock_guard<std::mutex> lk(m_mutex);
             if(m_instance_ptr == nullptr){
               m_instance_ptr = std::shared_ptr<Singleton>(new (std::nothrow) Singleton());
+              // 不能使用make_shared初始化对象，此处因为构造函数私有
+	      //m_instance_ptr = std::make_shared<Singleton>();
             }
         }
         return m_instance_ptr;
